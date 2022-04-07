@@ -78,7 +78,7 @@ app.put(`/recipes`, jsonParser, (req, res, next) => {
   
   let recipes = json.recipes;
   let duplicateRecipe = false;
-
+  console.log('recipes0', recipes[0]);
   for (let recipe of recipes) {
     if (req.body.name === recipe.name) {
       duplicateRecipe = true;
@@ -86,8 +86,11 @@ app.put(`/recipes`, jsonParser, (req, res, next) => {
     }
   }
   if (duplicateRecipe) {
-    console.log("reqname", req.body.name);
-    let index = recipes.indexOf(req.body.name);
+    let recipes = json.recipes;
+    console.log("reqname", req.body);
+    console.log(recipes);
+    let index = recipes.findIndex((obj => obj.name === req.body.name));
+    console.log("index", index);
     if (index !== -1) {
       recipes[index] = req.body;
     }
